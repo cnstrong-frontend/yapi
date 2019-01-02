@@ -214,6 +214,13 @@ export default class GroupList extends Component {
 
   render() {
     const { currGroup } = this.props;
+    let addFolderButton = null;
+    if(this.props.curUserRole == 'admin'){
+      addFolderButton = <Tooltip title="添加分组"><a className="editSet"><Icon className="btn" type="folder-add" onClick={this.showModal} /></a></Tooltip>;
+    } else {
+      addFolderButton = <a target="_blank" href="http://192.168.20.228:8090/pages/viewpage.action?pageId=18907651"  rel="noopener noreferrer" title="施强YAPI使用规范">规范</a>;
+    }
+
     return (
       <div className="m-group">
         {!this.props.study ? <div className="study-mask" /> : null}
@@ -221,11 +228,7 @@ export default class GroupList extends Component {
           <div className="curr-group">
             <div className="curr-group-name">
               <span className="name">{currGroup.group_name}</span>
-              <Tooltip title="添加分组">
-                <a className="editSet">
-                  <Icon className="btn" type="folder-add" onClick={this.showModal} />
-                </a>
-              </Tooltip>
+              {addFolderButton}
             
             </div>
             <div className="curr-group-desc">简介: {currGroup.group_desc}</div>
