@@ -570,9 +570,10 @@ class InterfaceMenu extends Component {
                             this.changeExpands();
                           }}
                           to={'/project/' + matchParams.id + '/interface/api/cat_' + item._id}
+                          title={item.name}
                         >
                           <Icon type="folder-open" style={{ marginRight: 5 }} />
-                          {item.name}
+                          {item.desc}
                         </Link>
                         <div className="btns">
                           <Tooltip title="删除分类">
