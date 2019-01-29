@@ -38,7 +38,7 @@ const HomeGuest = () => (
           </Col>
         </Row>
         <Row>
-          <Col lg={9} xs={24}>
+          <Col lg={10} xs={24}>
             <div className="home-des">
               <div className="logo">
                 <LogoSVG length="72px" />
@@ -46,7 +46,7 @@ const HomeGuest = () => (
               </div>
               <div className="detail">
                 高效、易用、功能强大的API管理平台<br />
-                <span className="desc">旨在为开发、产品、测试人员提供更优雅的接口管理服务</span>
+                <span className="desc">旨在为开发、产品、测试人员提供更优雅的接口管理服务</span><br />
               </div>
               <div className="btn-group">
                 <Link to="/login">
@@ -54,13 +54,14 @@ const HomeGuest = () => (
                     登录 / 注册
                   </Button>
                 </Link>
+                <a target="_blank" href="http://192.168.20.228:8090/pages/viewpage.action?pageId=18907651"
+                  rel="noopener noreferrer" title="施强YAPI使用规范" style={{color: 'white'}}>登陆、注册等问题，请先阅读《施强YAPI使用规范》</a>
                 {ThirdLogin != null ? <ThirdLogin /> : null}
               </div>
             </div>
           </Col>
-          <Col lg={15} xs={0} className="col-img">
+          <Col lg={14} xs={0} className="col-img">
             <div className="img-container">
-              
             </div>
           </Col>
         </Row>

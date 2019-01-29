@@ -70,7 +70,7 @@ Footer.defaultProps = {
       linkList: [
         {
           itemTitle: 'YApi 源码仓库',
-          itemLink: 'https://github.com/YMFE/yapi'
+          itemLink: 'https://github.com/cnstrong-frontend/yapi'
         }
       ]
     },
@@ -79,8 +79,8 @@ Footer.defaultProps = {
       iconType: 'team',
       linkList: [
         {
-          itemTitle: 'YMFE',
-          itemLink: 'https://ymfe.org'
+          itemTitle: '施强前端团队',
+          itemLink: 'https://github.com/cnstrong-frontend/'
         }
       ]
     },
@@ -90,20 +90,20 @@ Footer.defaultProps = {
       linkList: [
         {
           itemTitle: 'Github Issues',
-          itemLink: 'https://github.com/YMFE/yapi/issues'
+          itemLink: 'https://github.com/cnstrong-frontend/yapi/issues'
         },
         {
           itemTitle: 'Github Pull Requests',
-          itemLink: 'https://github.com/YMFE/yapi/pulls'
+          itemLink: 'https://github.com/cnstrong-frontend/yapi/pulls'
         }
       ]
     },
     {
-      title: 'Copyright © 2018 YMFE',
+      title: 'Copyright © 2018 cnstrong-frontend',
       linkList: [
         {
-          itemTitle: `版本: ${version} `,
-          itemLink: 'https://github.com/YMFE/yapi/blob/master/CHANGELOG.md'
+          itemTitle: `版本更新日志: ${version} `,
+          itemLink: 'http://192.168.20.228:8090/pages/viewpage.action?pageId=27885791'
         },
         {
           itemTitle: '使用文档',

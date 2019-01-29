@@ -93,8 +93,8 @@ class Reg extends Component {
             rules: [
               {
                 required: true,
-                message: '请输入email!',
-                pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$/
+                message: '请输入施强公司邮箱（@cnstrong.cn）!',
+                pattern: /^\w+([\.-]?\w+)*@cnstrong.cn$/
               }
             ]
           })(
@@ -161,6 +161,8 @@ class Reg extends Component {
             注册
           </Button>
         </FormItem>
+        <a target="_blank" href="http://192.168.20.228:8090/pages/viewpage.action?pageId=18907651"
+          rel="noopener noreferrer" title="施强YAPI使用规范">登陆、注册等问题，请先阅读《施强YAPI使用规范》</a>
       </Form>
     );
   }
