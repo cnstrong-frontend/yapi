@@ -84,12 +84,14 @@ class Login extends Component {
     const { isLDAP } = this.props;
 
     const emailRule =
-      this.state.loginType === 'ldap'
+      // this.state.loginType === 'ldap'
+        isLDAP
         ? {}
-        : {
+        : 
+        {
             required: true,
-            message: '请输入正确的email!',
-            pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$/
+            message: '请输入施强企业邮箱（@cnstrong.cn）!',
+            pattern: /^\w+([\.-]?\w+)*@cnstrong.cn$/
           };
     return (
       <Form onSubmit={this.handleSubmit}>
@@ -108,7 +110,7 @@ class Login extends Component {
             <Input
               style={changeHeight}
               prefix={<Icon type="user" style={{ fontSize: 13 }} />}
-              placeholder="Email"
+              placeholder="施强企业邮箱（@cnstrong.cn）"
             />
           )}
         </FormItem>

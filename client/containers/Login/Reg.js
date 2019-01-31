@@ -82,7 +82,7 @@ class Reg extends Component {
             <Input
               style={changeHeight}
               prefix={<Icon type="user" style={{ fontSize: 13 }} />}
-              placeholder="Username"
+              placeholder="姓名全拼"
             />
           )}
         </FormItem>
@@ -93,7 +93,7 @@ class Reg extends Component {
             rules: [
               {
                 required: true,
-                message: '请输入施强公司邮箱（@cnstrong.cn）!',
+                message: '请输入施强企业邮箱（@cnstrong.cn）!',
                 pattern: /^\w+([\.-]?\w+)*@cnstrong.cn$/
               }
             ]
@@ -101,7 +101,7 @@ class Reg extends Component {
             <Input
               style={changeHeight}
               prefix={<Icon type="mail" style={{ fontSize: 13 }} />}
-              placeholder="Email"
+              placeholder="施强企业邮箱（@cnstrong.cn）"
             />
           )}
         </FormItem>
