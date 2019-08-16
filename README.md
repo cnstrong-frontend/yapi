@@ -1,5 +1,10 @@
 ## YApi  可视化接口管理平台
+示例站点：
 <p><a target="_blank" href="http://yapi.demo.qunar.com">yapi.demo.qunar.com</a></p>
+
+
+文档：
+<p><a target="_blank" href="https://hellosean1025.github.io/yapi">hellosean1025.github.io/yapi</a></p>
 
 ### 平台介绍
 ![avatar](yapi-base-flow.jpg)
@@ -44,12 +49,29 @@ YApi 是<strong>高效</strong>、<strong>易用</strong>、<strong>功能强大
 ### YApi 插件
 * [yapi sso 登录插件](https://github.com/YMFE/yapi-plugin-qsso)
 * [yapi cas 登录插件](https://github.com/wsfe/yapi-plugin-cas) By wsfe
+* [yapi gitlab集成插件](https://github.com/cyj0122/yapi-plugin-gitlab)
+* [oauth2.0登录](https://github.com/xwxsee2014/yapi-plugin-oauth2)
+* [rap平台数据导入](https://github.com/wxxcarl/yapi-plugin-import-rap)
+* [dingding](https://github.com/zgs225/yapi-plugin-dding) 钉钉机器人推送插件
+* [export-docx-data](https://github.com/inceptiongt/Yapi-plugin-export-docx-data) 数据导出docx文档
+* [interface-oauth-token](https://github.com/shouldnotappearcalm/yapi-plugin-interface-oauth2-token) 定时自动获取鉴权token的插件
+* [import-swagger-customize](https://github.com/follow-my-heart/yapi-plugin-import-swagger-customize) 导入指定swagger接口
 
-### YApi 一些工具
-* [mysql服务http工具,可配合做自动化测试](https://github.com/hellosean1025/http-mysql-server)
+### 代码生成
+* [yapi-to-typescript：根据 YApi 的接口定义生成 TypeScript 的请求函数](https://github.com/fjc0k/yapi-to-typescript)
+* [yapi-gen-js-code: 根据 YApi 的接口定义生成 javascript 的请求函数](https://github.com/hellosean1025/yapi-gen-js-code)
 
 ### YApi docker部署（非官方）
 * [使用 alpine 版 docker 镜像快速部署 yapi](https://www.jianshu.com/p/a97d2efb23c5)
+* [docker-yapi](https://github.com/Ryan-Miao/docker-yapi)
+* [docker-compose一键部署yapi](https://github.com/jinfeijie/yapi)
+* [docker-YApi: 更易用的 YApi 镜像](https://github.com/fjc0k/docker-YApi)
+* [使用DockerCompose构建部署Yapi](https://github.com/MyHerux/daily-code/blob/master/Program/%E5%B7%A5%E5%85%B7%E7%AF%87/Yapi/%E4%BD%BF%E7%94%A8DockerCompose%E6%9E%84%E5%BB%BA%E9%83%A8%E7%BD%B2Yapi.md)
+
+### YApi 一些工具
+* [mysql服务http工具,可配合做自动化测试](https://github.com/hellosean1025/http-mysql-server)
+* [idea 一键上传接口到yapi插件](https://github.com/diwand/YapiIdeaUploadPlugin)
+* [idea 接口上传调试插件 easy-yapi](https://github.com/tangcent/easy-yapi)
 
 ### YApi 的一些客户
 * 去哪儿
@@ -57,21 +79,26 @@ YApi 是<strong>高效</strong>、<strong>易用</strong>、<strong>功能强大
 * 艺龙 
 * 美团
 * 百度
+* 腾讯
 * 阿里巴巴
 * 京东
+* 今日头条
 * 唯品支付 
 * 链家网
 * 快手
 * 便利蜂
 * 中商惠民
 * 新浪
+* VIPKID
+* 马蜂窝
 
 ### Authors
 * [hellosean1025](https://github.com/hellosean1025)
+* [gaoxiaomumu](https://github.com/gaoxiaomumu)
 * [zwjamnsss](https://github.com/amnsss)
 * [dwb1994](https://github.com/dwb1994)
 * [fungezi](https://github.com/fungezi)
-* [gaoxiaomumu](https://github.com/gaoxiaomumu)
+
 
 ### License
 Apache License 2.0

@@ -1211,7 +1211,7 @@ class InterfaceEditForm extends Component {
                         <span
                           className="href"
                           onClick={() =>
-                            window.open('https://yapi.ymfe.org/documents/mock.html', '_blank')
+                            window.open('https://hellosean1025.github.io/yapi/documents/mock.html', '_blank')
                           }
                         >
                           查看文档
@@ -1291,8 +1291,8 @@ class InterfaceEditForm extends Component {
               {...formItemLayout}
               label={
                 <span>
-                  邮件通知&nbsp;
-                  <Tooltip title={'开启邮件通知，可在 项目设置 里修改'}>
+                  消息通知&nbsp;
+                  <Tooltip title={'开启消息通知，可在 项目设置 里修改'}>
                     <Icon type="question-circle-o" style={{ width: '10px' }} />
                   </Tooltip>
                 </span>

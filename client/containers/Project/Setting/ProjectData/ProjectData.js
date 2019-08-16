@@ -73,7 +73,7 @@ class ProjectData extends Component {
       curImportType: 'swagger',
       curExportType: null,
       showLoading: false,
-      dataSync: 'good',
+      dataSync: 'merge',
       exportContent: 'all',
       isSwaggerUrl: false,
       swaggerUrl: '',
@@ -325,7 +325,7 @@ class ProjectData extends Component {
                   <a
                     target="_blank"
                     rel="noopener noreferrer"
-                    href="https://yapi.ymfe.org/documents/data.html"
+                    href="https://hellosean1025.github.io/yapi/documents/data.html"
                   >
                     <Tooltip title="点击查看文档">
                       <Icon type="question-circle-o" />
