@@ -229,3 +229,6 @@ em {
     color: #2395f1;
   }
 }
+
+// 防止编辑区图标重叠问题
+.anticon:not(:empty):before { display:none!important }
