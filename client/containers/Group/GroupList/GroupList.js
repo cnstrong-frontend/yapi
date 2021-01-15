@@ -1,7 +1,7 @@
 import React, { PureComponent as Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Icon, Modal, Input, message, Row, Menu, Col, Popover, Tooltip } from 'antd';
+import { Icon, Modal, Input, message,Spin,  Row, Menu, Col, Popover, Tooltip } from 'antd';
 import { autobind } from 'core-decorators';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
@@ -130,11 +130,6 @@ export default class GroupList extends Component {
       });
       await this.props.fetchGroupList();
       this.setState({ groupList: this.props.groupList });
-      const id = res.data.data._id;
-      const currGroup = _.find(this.props.groupList, group => {
-        return +group._id === +id;
-      });
-      this.props.setCurrGroup(currGroup);
       this.props.fetchGroupMsg(this.props.currGroup._id);
       this.props.fetchNewsData(this.props.currGroup._id, 'group', 1, 10);
     } else {
@@ -243,6 +238,11 @@ export default class GroupList extends Component {
               />
             </div>
           </div>
+          {this.state.groupList.length === 0 && <Spin style={{
+            marginTop: 20,
+            display: 'flex',
+            justifyContent: 'center'
+          }} />}
           <Menu
             className="group-list"
             mode="inline"

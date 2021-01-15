@@ -1,6 +1,6 @@
 const _ = require('underscore')
 const swagger = require('swagger-client');
-
+const compareVersions = require('compare-versions');
 
   var SwaggerData, isOAS3;
   function handlePath(path) {
@@ -25,6 +25,22 @@ const swagger = require('swagger-client');
             typeof res.content['application/json'] === 'object'
           ) {
             Object.assign(res, res.content['application/json']);
+            delete res.content;
+          }          
+          if (
+            res.content &&
+            res.content['application/hal+json'] &&
+            typeof res.content['application/hal+json'] === 'object'
+          ) {
+            Object.assign(res, res.content['application/hal+json']);
+            delete res.content;
+          }          
+          if (
+            res.content &&
+            res.content['*/*'] &&
+            typeof res.content['*/*'] === 'object'
+          ) {
+            Object.assign(res, res.content['*/*']);
             delete res.content;
           }
         });
@@ -72,12 +88,14 @@ const swagger = require('swagger-client');
         }
       }
 
-      isOAS3 = res.openapi && res.openapi === '3.0.0';
+      isOAS3 = res.openapi && compareVersions(res.openapi,'3.0.0') >= 0;
       if (isOAS3) {
         res = openapi2swagger(res);
       }
       res = await handleSwaggerData(res);
       SwaggerData = res;
+
+      interfaceData.basePath = res.basePath || '';
 
       if (res.tags && Array.isArray(res.tags)) {
         res.tags.forEach(tag => {
@@ -86,6 +104,8 @@ const swagger = require('swagger-client');
             desc: tag.description
           });
         });
+      }else{
+        res.tags = []
       }
 
       _.each(res.paths, (apis, path) => {
@@ -96,13 +116,15 @@ const swagger = require('swagger-client');
           api.method = method;
           let data = null;
           try {
-            data = handleSwagger(api);
+            data = handleSwagger(api, res.tags);
             if (data.catname) {
               if (!_.find(interfaceData.cats, item => item.name === data.catname)) {
-                interfaceData.cats.push({
-                  name: data.catname,
-                  desc: data.catname
-                });
+                if(res.tags.length === 0){
+                  interfaceData.cats.push({
+                    name: data.catname,
+                    desc: data.catname
+                  });
+                }
               }
             }
           } catch (err) {
@@ -113,17 +135,48 @@ const swagger = require('swagger-client');
           }
         });
       });
+
+      interfaceData.cats = interfaceData.cats.filter(catData=>{
+        let catName = catData.name;
+        return _.find(interfaceData.apis, apiData=>{
+          return apiData.catname === catName
+        })
+      })
+
       return interfaceData;
   }
 
-  function handleSwagger(data) {
+  function handleSwagger(data, originTags= []) {
 
     let api = {};
     //处理基本信息
     api.method = data.method.toUpperCase();
     api.title = data.summary || data.path;
     api.desc = data.description;
-    api.catname = data.tags && Array.isArray(data.tags) ? data.tags[0] : null;
+    api.catname = null;
+    if(data.tags && Array.isArray(data.tags)){
+      api.tag = data.tags;
+      for(let i=0; i< data.tags.length; i++){
+        if(/v[0-9\.]+/.test(data.tags[i])){
+          continue;
+        }
+
+        // 如果根路径有 tags，使用根路径 tags,不使用每个接口定义的 tag 做完分类
+        if(originTags.length > 0 && _.find(originTags, item=>{
+          return item.name === data.tags[i]
+        })){
+          api.catname = data.tags[i];
+          break;
+        }
+
+        if(originTags.length === 0){
+          api.catname = data.tags[i];
+          break;
+        }
+        
+      }
+
+    }
 
     api.path = handlePath(data.path);
     api.req_params = [];
@@ -190,6 +243,7 @@ const swagger = require('swagger-client');
           required: param.required ? '1' : '0'
         };
 
+        if (param.in) {
         switch (param.in) {
           case 'path':
             api.req_params.push(defaultParam);
@@ -202,12 +256,18 @@ const swagger = require('swagger-client');
             break;
           case 'formData':
             defaultParam.type = param.type === 'file' ? 'file' : 'text';
+			if (param.example) {
+              defaultParam.example = param.example;
+            }
             api.req_body_form.push(defaultParam);
             break;
           case 'header':
             api.req_headers.push(defaultParam);
             break;
         }
+      } else {
+        api.req_query.push(defaultParam);
+      }
       });
     }
 
@@ -241,7 +301,7 @@ const swagger = require('swagger-client');
       if (codes.indexOf('200') > -1) {
         curCode = '200';
       } else curCode = codes[0];
-      
+
       let res = api[curCode];
       if (res && typeof res === 'object') {
         if (res.schema) {

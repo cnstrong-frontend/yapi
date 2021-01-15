@@ -25,7 +25,8 @@ import './InterfaceCaseContent.scss';
       currCase: state.interfaceCol.currCase,
       isShowCol: state.interfaceCol.isShowCol,
       currProject: state.project.currProject,
-      projectEnv: state.project.projectEnv
+      projectEnv: state.project.projectEnv,
+      curUid: state.user.uid
     };
   },
   {
@@ -52,7 +53,8 @@ export default class InterfaceCaseContent extends Component {
     isShowCol: PropTypes.bool,
     currProject: PropTypes.object,
     getEnv: PropTypes.func,
-    projectEnv: PropTypes.object
+    projectEnv: PropTypes.object,
+    curUid: PropTypes.number
   };
 
   state = {
@@ -83,7 +85,7 @@ export default class InterfaceCaseContent extends Component {
     const { actionId } = params;
     currCaseId = +actionId || +currCaseId || result.payload.data.data[0].caseList[0]._id;
     let currColId = this.getColId(result.payload.data.data, currCaseId);
-    this.props.history.push('/project/' + params.id + '/interface/case/' + currCaseId);
+    // this.props.history.push('/project/' + params.id + '/interface/case/' + currCaseId);
     await this.props.fetchCaseData(currCaseId);
     this.props.setColData({ currCaseId: +currCaseId, currColId, isShowCol: false });
     // 获取当前case 下的环境变量
@@ -221,6 +223,9 @@ export default class InterfaceCaseContent extends Component {
               saveTip="更新保存修改"
               save={this.updateCase}
               ref={this.savePostmanRef}
+              interfaceId={currCase.interface_id}
+              projectId={currCase.project_id}
+              curUid={this.props.curUid}
             />
           )}
         </div>

@@ -14,6 +14,7 @@ import axios from 'axios';
 import ImportInterface from './ImportInterface';
 import { Input, Icon, Button, Modal, message, Tooltip, Tree, Form } from 'antd';
 import { arrayChangeIndex } from '../../../../common.js';
+import _ from 'underscore'
 
 const TreeNode = Tree.TreeNode;
 const FormItem = Form.Item;
@@ -148,7 +149,7 @@ export default class InterfaceColMenu extends Component {
     this.setState({ expands: keys });
   };
 
-  onSelect = keys => {
+  onSelect = _.debounce(keys => {
     if (keys.length) {
       const type = keys[0].split('_')[0];
       const id = keys[0].split('_')[1];
@@ -168,7 +169,7 @@ export default class InterfaceColMenu extends Component {
     this.setState({
       expands: null
     });
-  };
+  }, 500);
 
   showDelColConfirm = colId => {
     let that = this;
@@ -243,8 +244,9 @@ export default class InterfaceColMenu extends Component {
     let that = this;
     let caseData = await that.props.fetchCaseData(caseId);
     let data = caseData.payload.data.data;
+    data = JSON.parse(JSON.stringify(data));
     data.casename=`${data.casename}_copy`
-    data._id=null
+    delete data._id 
     const res = await axios.post('/api/col/add_case',data);
       if (!res.data.errcode) {
         message.success('克隆用例成功');
@@ -490,19 +492,16 @@ export default class InterfaceColMenu extends Component {
     if (this.state.filterValue) {
       let arr = [];
       list = list.filter(item => {
-        let interfaceFilter = false;
-        if (item.name.indexOf(this.state.filterValue) === -1) {
-          item.caseList = item.caseList.filter(inter => {
-            if (inter.casename.indexOf(this.state.filterValue) === -1) {
-              return false;
-            }
-            //arr.push('cat_' + inter.catid)
-            interfaceFilter = true;
-            return true;
-          });
-          arr.push('col_' + item._id);
-          return interfaceFilter === true;
-        }
+
+        item.caseList = item.caseList.filter(inter => {
+          if (inter.casename.indexOf(this.state.filterValue) === -1 
+          && inter.path.indexOf(this.state.filterValue) === -1
+          ) {
+            return false;
+          }
+          return true;
+        });
+
         arr.push('col_' + item._id);
         return true;
       });
